@@ -7,18 +7,26 @@ import { valorantapiService } from 'src/app/services/valorantapi.service';
   styleUrls: ['./skins.component.css'],
 })
 export class SkinsComponent implements OnInit {
-  public sdata: any;
+  public skinList: any;
+  public selectedSkin: any;
 
   constructor(private apiService: valorantapiService) {}
 
   ngOnInit(): void {
-    this.getSkinsData();
+    this.getSkinsList();
   }
 
-  getSkinsData() {
-    this.apiService.getSkinsData().subscribe((res: any) => {
-      this.sdata = res;
-      console.log(this.sdata);
+  getSkinsList() {
+    this.apiService.getData('weapons/skins').subscribe((res: any) => {
+      this.skinList = res;
+      console.log(this.skinList);
+      this.getSkin(this.skinList.data[50].uuid);
+    });
+  }
+  getSkin(id: string) {
+    this.apiService.getData('weapons/skins/' + id).subscribe((res: any) => {
+      this.selectedSkin = res;
+      console.log(this.selectedSkin);
     });
   }
 }

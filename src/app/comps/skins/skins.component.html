@@ -1,22 +1,24 @@
 <div class="d-flex justify-content-center p-2">
-  <div class="card text-center" style="width: 50%; height: 50%">
-    
+  <div class="card text-center">
     <div class="dropdown">
       <button
-      class="btn btn-sm btn-secondary dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton2"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
+        class="btn btn-sm btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton2"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
       >
-      Skin
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li *ngFor="let skin of sdata.data">{{ skin.displayName }}</li>
-    </ul>
-  </div>
-  
-  <span>{{ sdata.data[250].displayName }}</span>
-    <img [src]="sdata.data[250].displayIcon" alt=""/>
+        Skin
+      </button>
+      <ul *ngIf="skinList" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let skin of skinList.data" (click)="getSkin(skin.uuid)">
+          {{ skin.displayName }}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="selectedSkin">
+      <span>{{selectedSkin.data.displayName}}</span>
+      <img [src]="selectedSkin.data.displayIcon"/>
+    </div>
   </div>
 </div>

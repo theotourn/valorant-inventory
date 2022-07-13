@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class valorantapiService {
+  private url: string = 'https://valorant-api.com/v1/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getSkinsData() : Observable<any> {
-    return this.http.get('https://valorant-api.com/v1/weapons/skins');
+  getData(endPoint: string): Observable<any> {
+    return this.http.get(this.url + endPoint);
   }
 }
